@@ -30,13 +30,13 @@ $app->get('/user/{id}', ['middleware' => 'auth', 'uses' =>  'UserController@get_
  /* Route category ads */
  $app->get('/category', 'CategoryAdsController@index');
  $app->get('/category/{id}', 'CategoryAdsController@read');
+ $app->get('/category/delete/{id}', 'CategoryAdsController@delete');
  $app->post('/category', 'CategoryAdsController@create');
  $app->post('/category/update/{id}', 'CategoryAdsController@update');
- $app->post('/category/delete/{id}', 'CategoryAdsController@delete');
 
   /* Route item ads */
   $app->get('/item_ads', 'ItemAdsController@index');
   $app->get('/item_ads/{id}', 'ItemAdsController@read');
+  $app->get('/item_ads/delete/{id}', 'ItemAdsController@delete');
   $app->post('/item_ads/create', 'ItemAdsController@create');
   $app->post('/item_ads/update/{id}', 'ItemAdsController@update');
-  $app->post('/item_ads/delete/{id}', 'ItemAdsController@delete');
