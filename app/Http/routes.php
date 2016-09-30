@@ -27,16 +27,30 @@ $app->get('/user/{id}', ['middleware' => 'auth', 'uses' =>  'UserController@get_
  | ------------------------------------------
  */
 
- /* Route category ads */
- $app->get('/category', 'CategoryAdsController@index');
- $app->get('/category/{id}', 'CategoryAdsController@read');
- $app->get('/category/delete/{id}', 'CategoryAdsController@delete');
- $app->post('/category', 'CategoryAdsController@create');
- $app->post('/category/update/{id}', 'CategoryAdsController@update');
+/* Route category ads */
+$app->get('/category', 'CategoryAdsController@index');
+$app->get('/category/{id}', 'CategoryAdsController@read');
+$app->get('/category/delete/{id}', 'CategoryAdsController@delete');
+$app->post('/category', 'CategoryAdsController@create');
+$app->post('/category/update/{id}', 'CategoryAdsController@update');
 
-  /* Route item ads */
-  $app->get('/item_ads', 'ItemAdsController@index');
-  $app->get('/item_ads/{id}', 'ItemAdsController@read');
-  $app->get('/item_ads/delete/{id}', 'ItemAdsController@delete');
-  $app->post('/item_ads/create', 'ItemAdsController@create');
-  $app->post('/item_ads/update/{id}', 'ItemAdsController@update');
+/* Route item ads */
+$app->get('/item_ads', 'ItemAdsController@index');
+$app->get('/item_ads/{id}', 'ItemAdsController@read');
+$app->get('/item_ads/delete/{id}', 'ItemAdsController@delete');
+$app->post('/item_ads/create', 'ItemAdsController@create');
+$app->post('/item_ads/update/{id}', 'ItemAdsController@update');
+
+
+
+/*
+ | ------------------------------------------
+ | Moview API for entertainment
+ | ------------------------------------------
+ */
+$app->get('/movie', 'MovieController@index');
+$app->get('/movie/category/{category_name}', 'MovieController@movie_category');
+$app->get('/movie/category_list', 'MovieController@lis_category');
+$app->get('/movie/tv_show', 'TvShowController@index');
+$app->get('/movie/tv_show/{id_movie}', 'TvShowController@tvshow_movie_id');
+$app->get('/movie/tv_show/show/{id}', 'TvShowController@tvshow_id');
