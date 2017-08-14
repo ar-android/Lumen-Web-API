@@ -40,17 +40,3 @@ $app->get('/item_ads/{id}', 'ItemAdsController@read');
 $app->get('/item_ads/delete/{id}', 'ItemAdsController@delete');
 $app->post('/item_ads/create', 'ItemAdsController@create');
 $app->post('/item_ads/update/{id}', 'ItemAdsController@update');
-
-
-
-/*
- | ------------------------------------------
- | Moview API for entertainment
- | ------------------------------------------
- */
-$app->get('/movie', 'MovieController@index');
-$app->get('/movie/category/{category_name}', 'MovieController@movie_category');
-$app->get('/movie/category_list', 'MovieController@lis_category');
-$app->get('/movie/tv_show', 'TvShowController@index');
-$app->get('/movie/tv_show/{id_movie}', 'TvShowController@tvshow_movie_id');
-$app->get('/movie/tv_show/show/{id}', 'TvShowController@tvshow_id');

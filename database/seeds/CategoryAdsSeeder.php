@@ -8,9 +8,13 @@ class CategoryAdsSeeder extends Seeder {
     public function run()
     {
         DB::table('category_ads')->delete();
-        $category = app()->make('App\CategoryAds');
-        $category->fill(['name' => 'Komputer & Gadget']);
-        $category->save();
+        $faker = Faker\Factory::create();
+
+        for ($i=0; $i < 6; $i++) { 
+	        $category = app()->make('App\CategoryAds');
+	        $category->fill(['name' => $faker->text]);
+	        $category->save();
+        }
     }
 
 }
