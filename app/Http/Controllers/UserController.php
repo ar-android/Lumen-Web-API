@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\User;
+use App\UserProfile;
 use Auth;
+use Storage;
 
 class UserController extends Controller
 {
@@ -62,4 +65,57 @@ class UserController extends Controller
         }
     }
 
+    public function update(Request $request)
+    {
+      $this->validate($request, [
+          'avatar' => 'required|image',
+          'first_name' => 'required|string',
+          'last_name' => 'required|string'
+      ]);
+
+      $avatar = Str::random(34);
+      $request->file('avatar')->move(storage_path('avatar'), $avatar);
+
+      $user_profile = UserProfile::where('user_id', Auth::user()->id)->first();
+      if ($user_profile) {
+        $current_avatar_path = storage_path('avatar') . '/' . $user_profile->avatar;
+        if (file_exists($current_avatar_path)) {
+          unlink($current_avatar_path);
+        }
+
+        $user_profile->avatar = $avatar;
+        $user_profile->first_name = $request->first_name;
+        $user_profile->last_name = $request->last_name;
+        $user_profile->save();
+
+      }else{
+        $user_profile = new UserProfile;
+        $user_profile->user_id = Auth::user()->id;
+        $user_profile->avatar = $avatar;
+        $user_profile->first_name = $request->first_name;
+        $user_profile->last_name = $request->last_name;
+        $user_profile->save();
+      }
+
+      $res['success'] = true;
+      $res['message'] = "Success update user profile.";
+      $res['data'] = $user_profile;
+      
+      return $res;
+    }
+
+    public function get_avatar($name)
+    {
+        $avatar_path = storage_path('avatar') . '/' . $name;
+
+        if (file_exists($avatar_path)) {
+          $file = file_get_contents($avatar_path);
+          return response($file, 200)->header('Content-Type', 'image/jpeg');
+        }
+
+        $res['success'] = false;
+        $res['message'] = "Avatar not found";
+        
+        return $res;
+    }
 }

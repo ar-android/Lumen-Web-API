@@ -27,7 +27,7 @@ class LoginController extends Controller
             return response($res);
         }else{
             if ($hasher->check($password, $login->password)) {
-                $api_token = sha1(time());
+                $api_token = \Illuminate\Support\Str::random(64);
                 $create_token = User::where('id', $login->id)->update(['api_token' => $api_token]);
                 if ($create_token) {
                     $res['success'] = true;

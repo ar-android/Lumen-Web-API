@@ -20,6 +20,8 @@ $app->get('/', function () use ($app) {
 $app->post('/login', 'LoginController@index');
 $app->post('/register', 'UserController@register');
 $app->get('/user/{id}', ['middleware' => 'auth', 'uses' =>  'UserController@get_user']);
+$app->post('/user/update', ['middleware' => 'auth', 'uses' =>  'UserController@update']);
+$app->get('/user/avatar/{name}', 'UserController@get_avatar');
 
 /*
  | ------------------------------------------
